@@ -1,11 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> Scoober Shift Eearnings Calculator </title>
 </head>
+
 <body>
-    
+    <h2> כמה הרווחתי היום? </h2>
+    <form class="shiftDataForm">
+        <fieldset>
+            <legend> נתוני משמרת </legend>
+            <div class="inputDiv">
+                <label class="vehicleType"> בחר כלי רכב:
+                    <div>
+                        <label for="bicycle"> אופניים </label>
+                        <input type="radio" value="bicycle" name="vehicle" id="bicycle" required/>
+                        <label for="motorbike"> רכב/אופנוע </label>
+                        <input type="radio" value="motorbike" id="motorbike" name="vehicle" />
+                    </div>
+                </label>
+            </div>
+            <div class="inputDiv">
+                <label for="jobsAmount"> כמה משלוחים עשית: </label>
+                <input type="tel" id="jobsAmount" name="jobsAmount" />
+            </div>
+            <div class="inputDiv">
+                <label for="hours"> כמה שעות עבדת? </label>
+                <input type="tel" id="hours" name="hours" />
+            </div>
+            <div class="inputDiv">
+                <label for="km"> כמה ק"מ נסעת במשמרת? </label>
+                <input type="tel" id="km" name="km" />
+            </div>
+            <div class="inputDiv submitBtnDiv">
+                <button type="button" class="submitBtn"> חשב </button>
+            </div>
+        </fieldset>
+    </form>
+    <div class="outputDiv"></div>
+
+
 </body>
+
 </html>
