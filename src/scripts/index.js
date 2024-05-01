@@ -59,6 +59,9 @@ submitBtn.onclick = () => {
     total = +((32.3 * hours.value) + km)
   }
 
+  outputDiv.style.border = '1px solid blue';
+  outputDiv.style.color = 'black';
+  outputDiv.style.padding = '1rem';
   outputDiv.textContent = `שכר המשמרת לפי הנתונים הנ"ל הינו: ${total.toFixed(2)} ש"ח`;
 };
 
