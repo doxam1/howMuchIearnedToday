@@ -6,6 +6,7 @@ body {
     flex-direction: column;
     gap: 2rem;
     font-size: 20px;
+    position: relative;
 }
 
 .shiftDataForm fieldset{
@@ -34,4 +35,9 @@ body {
             border-radius: .5rem;
         }
     }
+}
+
+.counter {
+    position: absolute;
+    top: 95svh;
 }
