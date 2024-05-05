@@ -237,7 +237,7 @@ submitBtn.onclick = () => {
         }, 1500);
         return;
       }
-      shabesHoursMoneyWise = shabesHoursAmountTotal * 16;
+      shabesHoursMoneyWise = shabesHoursAmountTotal * 16.15;
     }
     total = +((32.3 * hours.value) + km + shabesHoursMoneyWise);
 
