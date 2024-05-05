@@ -5,7 +5,6 @@ const saturday = document.querySelector("#shabat");
 const saturdayNight = document.querySelector("#saturdayNight");
 const fieldset = document.querySelector("fieldset");
 
-// if (saturday.checked == true) {
 saturday.onchange = () => {
   const shabesJobs = document.createElement("div");
   const shabesHours = document.createElement("div");
@@ -28,12 +27,6 @@ saturday.onchange = () => {
       shabesJobs,
       document.querySelector(".inputDiv.submitBtnDiv")
     );
-    //const shabesHoursInput = document.querySelector('#shabesHours');
-    // shabesHoursInput.onkeyup = () => {
-    //   if (shabesHoursInput.value == document.querySelector("#hours").value) {
-    //     document.querySelector('#shabesJobsAmount').value = document.querySelector('#jobsAmount').value;
-    //   }
-    //}
   } else if (saturday.checked == false) {
     fieldset.removeChild(document.querySelector(".shabesHours"));
     fieldset.removeChild(document.querySelector(".shabesJobs"));
@@ -209,9 +202,23 @@ submitBtn.onclick = () => {
         return;
       }
     }
-    let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;
     if (saturday.checked == true) {
-      
+      let shabesJobsAmountTotal =
+        document.querySelector("#shabesJobsAmount").value;
+      if (
+        shabesJobsAmountTotal == "" ||
+        Number.isNaN(parseInt(shabesJobsAmountTotal)) == true ||
+        parseInt(shabesJobsAmountTotal) > parseInt(jobsAmount.value)
+      ) {
+        outputDiv.style.color = "red";
+        outputDiv.textContent = "כמה משלוחים נעשו בשבת?";
+        setTimeout(() => {
+          outputDiv.style = "";
+          outputDiv.textContent = "";
+        }, 1500);
+        return;
+      }
+      let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;      
       if (
         shabesHoursAmountTotal == "" ||
         Number.isNaN(parseInt(shabesHoursAmountTotal)) == true ||
@@ -229,7 +236,6 @@ submitBtn.onclick = () => {
       shabesHoursMoneyWise = shabesHoursAmountTotal * 16;
     }
     total = +((32.3 * hours.value) + km + shabesHoursMoneyWise);
-    console.log(total - km)
 
     if (saturday.checked == true && saturdayNight.checked == false) {
       if (total - km < (document.querySelector("#shabesJobsAmount").value * 20) + jobsAmount.value * 20) {

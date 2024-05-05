@@ -9,6 +9,10 @@ body {
     position: relative;
 }
 
+.outputDiv {
+    margin: -16px;
+}
+
 .shiftDataForm fieldset{
     display: flex;
     flex-direction: column;
