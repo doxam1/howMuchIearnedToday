@@ -63,6 +63,7 @@ submitBtn.onclick = () => {
     outputDiv.style.color = "red";
     outputDiv.textContent = "אנא בחר כלי רכב";
     setTimeout(() => {
+      outputDiv.style = "";
       outputDiv.textContent = "";
     }, 1500);
     return;
@@ -75,6 +76,7 @@ submitBtn.onclick = () => {
     outputDiv.style.color = "red";
     outputDiv.textContent = " כמה משלוחים עשית? ";
     setTimeout(() => {
+      outputDiv.style = "";
       outputDiv.textContent = "";
     }, 1500);
     return;
@@ -84,6 +86,7 @@ submitBtn.onclick = () => {
     outputDiv.style.color = "red";
     outputDiv.textContent = "כמה שעות עבדת?";
     setTimeout(() => {
+      outputDiv.style = "";
       outputDiv.textContent = "";
     }, 1500);
     return;
@@ -93,6 +96,7 @@ submitBtn.onclick = () => {
     outputDiv.style.color = "red";
     outputDiv.textContent = 'כמה ק"מ נסעת?';
     setTimeout(() => {
+      outputDiv.style = "";
       outputDiv.textContent = "";
     }, 1500);
     return;
