@@ -5,6 +5,12 @@ const saturday = document.querySelector("#shabat");
 const saturdayNight = document.querySelector("#saturdayNight");
 const fieldset = document.querySelector("fieldset");
 
+const ios = () => {
+  if (typeof window === `undefined` || typeof navigator === `undefined`) return false;
+
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent || navigator.vendor || (window.opera && opera.toString() === `[object Opera]`));
+};
+
 saturday.onchange = () => {
   const shabesJobs = document.createElement("div");
   const shabesHours = document.createElement("div");
@@ -26,7 +32,15 @@ saturday.onchange = () => {
     fieldset.insertBefore(
       shabesJobs,
       document.querySelector(".inputDiv.submitBtnDiv")
-    );
+    )
+    if (ios() == true) {
+      const telInputs = document.querySelectorAll("input[type='tel']");
+      telInputs.forEach(input => {
+        input.setAttribute('type', 'number');
+        input.setAttribute('inputmode', 'decimel');
+      })
+      console.log(telInputs)
+    }
   } else if (saturday.checked == false) {
     fieldset.removeChild(document.querySelector(".shabesHours"));
     fieldset.removeChild(document.querySelector(".shabesJobs"));
@@ -45,6 +59,14 @@ saturdayNight.onchange = () => {
       saturdayNightJobs,
       document.querySelector(".inputDiv.submitBtnDiv")
     );
+    if (ios() == true) {
+      const telInputs = document.querySelectorAll("input[type='tel']");
+      telInputs.forEach(input => {
+        input.setAttribute('type', 'number');
+        input.setAttribute('inputmode', 'decimel');
+      })
+      console.log(telInputs)
+    }
   } else if (saturdayNight.checked == false) {
     fieldset.removeChild(document.querySelector(".saturdayNightJobs"));
   }
@@ -271,3 +293,13 @@ submitBtn.onclick = () => {
     2
   )} ש"ח`;
 };
+
+
+
+if (ios() == true) {
+  const telInputs = document.querySelectorAll("input[type='tel']");
+  telInputs.forEach(input => {
+    input.setAttribute('type', 'number');
+    input.setAttribute('inputmode', 'decimel');
+  })
+}
