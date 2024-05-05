@@ -28,6 +28,12 @@ saturday.onchange = () => {
       shabesJobs,
       document.querySelector(".inputDiv.submitBtnDiv")
     );
+    //const shabesHoursInput = document.querySelector('#shabesHours');
+    // shabesHoursInput.onkeyup = () => {
+    //   if (shabesHoursInput.value == document.querySelector("#hours").value) {
+    //     document.querySelector('#shabesJobsAmount').value = document.querySelector('#jobsAmount').value;
+    //   }
+    //}
   } else if (saturday.checked == false) {
     fieldset.removeChild(document.querySelector(".shabesHours"));
     fieldset.removeChild(document.querySelector(".shabesJobs"));
@@ -50,6 +56,7 @@ saturdayNight.onchange = () => {
     fieldset.removeChild(document.querySelector(".saturdayNightJobs"));
   }
 };
+
 
 submitBtn.onclick = () => {
   const jobsAmount = document.querySelector("#jobsAmount");
@@ -202,8 +209,9 @@ submitBtn.onclick = () => {
         return;
       }
     }
+    let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;
     if (saturday.checked == true) {
-      let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;
+      
       if (
         shabesHoursAmountTotal == "" ||
         Number.isNaN(parseInt(shabesHoursAmountTotal)) == true ||
@@ -220,28 +228,29 @@ submitBtn.onclick = () => {
       }
       shabesHoursMoneyWise = shabesHoursAmountTotal * 16;
     }
-    total = +(32.3 * hours.value + km + shabesHoursMoneyWise);
+    total = +((32.3 * hours.value) + km + shabesHoursMoneyWise);
+    console.log(total - km)
 
     if (saturday.checked == true && saturdayNight.checked == false) {
-      if ((total < document.querySelector("#shabesJobsAmount").value * 20) + jobsAmount.value * 20) {
-        total = document.querySelector("#shabesJobsAmount").value * 40 + ((jobsAmount.value - document.querySelector("#shabesJobsAmount").value) * 20);
+      if (total - km < (document.querySelector("#shabesJobsAmount").value * 20) + jobsAmount.value * 20) {
+        total = (document.querySelector("#shabesJobsAmount").value * 40) + ((jobsAmount.value - document.querySelector("#shabesJobsAmount").value) * 20) + km;
       }
     } else if (saturday.checked == false && saturdayNight.checked == true) {
       if (
-        total <
+        total - km <
         (document.querySelector("#saturdayNightJobsAmount").value * 10) + (jobsAmount.value * 20)
       ) {
-        total = document.querySelector("#saturdayNightJobsAmount").value * 30 + ((jobsAmount.value - document.querySelector("#saturdayNightJobsAmount").value) * 20);
+        total = document.querySelector("#saturdayNightJobsAmount").value * 30 + ((jobsAmount.value - document.querySelector("#saturdayNightJobsAmount").value) * 20) + km;
       }
     } else if (saturday.checked == true && saturdayNight.checked == true) {
       if (
-        total <
+        total - km <
         (document.querySelector("#shabesJobsAmount").value * 20) +
           (document.querySelector("#saturdayNightJobsAmount").value * 10) + (jobsAmount.value * 20)
       ) {
         total =
           (document.querySelector("#shabesJobsAmount").value * 40) +
-          (document.querySelector("#saturdayNightJobsAmount").value * 30) +((jobsAmount.value - document.querySelector("#shabesJobsAmount").value - document.querySelector("#saturdayNightJobsAmount").value) * 20);
+          (document.querySelector("#saturdayNightJobsAmount").value * 30) +((jobsAmount.value - document.querySelector("#shabesJobsAmount").value - document.querySelector("#saturdayNightJobsAmount").value) * 20) + km;
       }
     }
   }
