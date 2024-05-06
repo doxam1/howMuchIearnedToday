@@ -8,6 +8,7 @@ const fieldset = document.querySelector("fieldset");
 const ios = () => {
   if (typeof window === `undefined` || typeof navigator === `undefined`) return false;
 
+  // eslint-disable-next-line no-undef
   return /iPhone|iPad|iPod/i.test(navigator.userAgent || navigator.vendor || (window.opera && opera.toString() === `[object Opera]`));
 };
 
@@ -131,9 +132,27 @@ submitBtn.onclick = () => {
   }
 
   if (jobsAmount.value / hours.value >= 2) {
+    let shabesHoursMoneyWise = 0;
     let shabesJobsAmountMoneyWise = 0;
     let saturdayNightJobsMoneyWise = 0;
     if (saturday.checked == true) {
+      let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;      
+      if (
+        shabesHoursAmountTotal == "" ||
+        Number.isNaN(parseInt(shabesHoursAmountTotal)) == true ||
+        parseInt(shabesHoursAmountTotal) > parseInt(hours.value)
+      ) {
+        outputDiv.style.color = "red";
+        outputDiv.textContent =
+          "כמה שעות עבדת בשבת? - כניסת שבת ועד צאת שבת בלבד";
+        setTimeout(() => {
+          outputDiv.style = "";
+          outputDiv.textContent = "";
+        }, 1500);
+        return;
+      }
+      shabesHoursMoneyWise = shabesHoursAmountTotal * 16.15;
+      
       let shabesJobsAmountTotal =
         document.querySelector("#shabesJobsAmount").value;
       if (
@@ -210,6 +229,10 @@ submitBtn.onclick = () => {
       shabesJobsAmountMoneyWise +
       saturdayNightJobsMoneyWise
     );
+    if (saturday.checked == true && (document.querySelector("#shabesHours").value * 16.15) + (hours.value * 32.3) > total - km) {
+      total = +((document.querySelector("#shabesHours").value * 16.15) + (hours.value * 32.3) + km);
+    }
+
   } else if (jobsAmount.value / hours.value < 2) {
     let shabesHoursMoneyWise = 0;
     if (saturdayNight.checked == true && saturday.checked == true) {
