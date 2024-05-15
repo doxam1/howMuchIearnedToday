@@ -347,7 +347,7 @@ submitBtn.onclick = () => {
   outputDiv.style.padding = "1rem";
   outputDiv.textContent = `שכר המשמרת לפי הנתונים הנ"ל הינו: \r\n ${total.toFixed(
     2
-  )} ש"ח / ${(total / parseInt(hours.value)).toFixed(2)} לשעה`;
+  )} ש"ח / ${(total / hours.value).toFixed(2)} לשעה`;
 };
 
 if (ios() == true) {
