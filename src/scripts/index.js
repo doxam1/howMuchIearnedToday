@@ -6,10 +6,15 @@ const saturdayNight = document.querySelector("#saturdayNight");
 const fieldset = document.querySelector("fieldset");
 
 const ios = () => {
-  if (typeof window === `undefined` || typeof navigator === `undefined`) return false;
+  if (typeof window === `undefined` || typeof navigator === `undefined`)
+    return false;
 
   // eslint-disable-next-line no-undef
-  return /iPhone|iPad|iPod/i.test(navigator.userAgent || navigator.vendor || (window.opera && opera.toString() === `[object Opera]`));
+  return /iPhone|iPad|iPod/i.test(
+    navigator.userAgent ||
+      navigator.vendor ||
+      (window.opera && opera.toString() === `[object Opera]`)
+  );
 };
 
 saturday.onchange = () => {
@@ -33,14 +38,14 @@ saturday.onchange = () => {
     fieldset.insertBefore(
       shabesJobs,
       document.querySelector(".inputDiv.submitBtnDiv")
-    )
+    );
     if (ios() == true) {
       const telInputs = document.querySelectorAll("input[type='tel']");
-      telInputs.forEach(input => {
-        input.setAttribute('type', 'number');
-        input.setAttribute('inputmode', 'decimel');
-      })
-      console.log(telInputs)
+      telInputs.forEach((input) => {
+        input.setAttribute("type", "number");
+        input.setAttribute("inputmode", "decimel");
+      });
+      console.log(telInputs);
     }
   } else if (saturday.checked == false) {
     fieldset.removeChild(document.querySelector(".shabesHours"));
@@ -62,17 +67,16 @@ saturdayNight.onchange = () => {
     );
     if (ios() == true) {
       const telInputs = document.querySelectorAll("input[type='tel']");
-      telInputs.forEach(input => {
-        input.setAttribute('type', 'number');
-        input.setAttribute('inputmode', 'decimel');
-      })
-      console.log(telInputs)
+      telInputs.forEach((input) => {
+        input.setAttribute("type", "number");
+        input.setAttribute("inputmode", "decimel");
+      });
+      console.log(telInputs);
     }
   } else if (saturdayNight.checked == false) {
     fieldset.removeChild(document.querySelector(".saturdayNightJobs"));
   }
 };
-
 
 submitBtn.onclick = () => {
   const jobsAmount = document.querySelector("#jobsAmount");
@@ -132,11 +136,11 @@ submitBtn.onclick = () => {
   }
 
   if (jobsAmount.value / hours.value >= 2) {
-    let shabesHoursMoneyWise = 0;
+    // let shabesHoursMoneyWise = 0;
     let shabesJobsAmountMoneyWise = 0;
     let saturdayNightJobsMoneyWise = 0;
     if (saturday.checked == true) {
-      let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;      
+      let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;
       if (
         shabesHoursAmountTotal == "" ||
         Number.isNaN(parseInt(shabesHoursAmountTotal)) == true ||
@@ -151,8 +155,8 @@ submitBtn.onclick = () => {
         }, 1500);
         return;
       }
-      shabesHoursMoneyWise = shabesHoursAmountTotal * 16.15;
-      
+      // shabesHoursMoneyWise = shabesHoursAmountTotal * 16.15;
+
       let shabesJobsAmountTotal =
         document.querySelector("#shabesJobsAmount").value;
       if (
@@ -229,10 +233,18 @@ submitBtn.onclick = () => {
       shabesJobsAmountMoneyWise +
       saturdayNightJobsMoneyWise
     );
-    if (saturday.checked == true && (document.querySelector("#shabesHours").value * 16.15) + (hours.value * 32.3) > total - km) {
-      total = +((document.querySelector("#shabesHours").value * 16.15) + (hours.value * 32.3) + km);
+    if (
+      saturday.checked == true &&
+      document.querySelector("#shabesHours").value * 16.15 +
+        hours.value * 32.3 >
+        total - km
+    ) {
+      total = +(
+        document.querySelector("#shabesHours").value * 16.15 +
+        hours.value * 32.3 +
+        km
+      );
     }
-
   } else if (jobsAmount.value / hours.value < 2) {
     let shabesHoursMoneyWise = 0;
     if (saturdayNight.checked == true && saturday.checked == true) {
@@ -267,7 +279,7 @@ submitBtn.onclick = () => {
         }, 1500);
         return;
       }
-      let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;      
+      let shabesHoursAmountTotal = document.querySelector("#shabesHours").value;
       if (
         shabesHoursAmountTotal == "" ||
         Number.isNaN(parseInt(shabesHoursAmountTotal)) == true ||
@@ -284,45 +296,64 @@ submitBtn.onclick = () => {
       }
       shabesHoursMoneyWise = shabesHoursAmountTotal * 16.15;
     }
-    total = +((32.3 * hours.value) + km + shabesHoursMoneyWise);
+    total = +(32.3 * hours.value + km + shabesHoursMoneyWise);
 
     if (saturday.checked == true && saturdayNight.checked == false) {
-      if (total - km < (document.querySelector("#shabesJobsAmount").value * 20) + jobsAmount.value * 20) {
-        total = (document.querySelector("#shabesJobsAmount").value * 40) + ((jobsAmount.value - document.querySelector("#shabesJobsAmount").value) * 20) + km;
+      if (
+        total - km <
+        document.querySelector("#shabesJobsAmount").value * 20 +
+          jobsAmount.value * 20
+      ) {
+        total =
+          document.querySelector("#shabesJobsAmount").value * 40 +
+          (jobsAmount.value -
+            document.querySelector("#shabesJobsAmount").value) *
+            20 +
+          km;
       }
     } else if (saturday.checked == false && saturdayNight.checked == true) {
       if (
         total - km <
-        (document.querySelector("#saturdayNightJobsAmount").value * 10) + (jobsAmount.value * 20)
+        document.querySelector("#saturdayNightJobsAmount").value * 10 +
+          jobsAmount.value * 20
       ) {
-        total = document.querySelector("#saturdayNightJobsAmount").value * 30 + ((jobsAmount.value - document.querySelector("#saturdayNightJobsAmount").value) * 20) + km;
+        total =
+          document.querySelector("#saturdayNightJobsAmount").value * 30 +
+          (jobsAmount.value -
+            document.querySelector("#saturdayNightJobsAmount").value) *
+            20 +
+          km;
       }
     } else if (saturday.checked == true && saturdayNight.checked == true) {
       if (
         total - km <
-        (document.querySelector("#shabesJobsAmount").value * 20) +
-          (document.querySelector("#saturdayNightJobsAmount").value * 10) + (jobsAmount.value * 20)
+        document.querySelector("#shabesJobsAmount").value * 20 +
+          document.querySelector("#saturdayNightJobsAmount").value * 10 +
+          jobsAmount.value * 20
       ) {
         total =
-          (document.querySelector("#shabesJobsAmount").value * 40) +
-          (document.querySelector("#saturdayNightJobsAmount").value * 30) +((jobsAmount.value - document.querySelector("#shabesJobsAmount").value - document.querySelector("#saturdayNightJobsAmount").value) * 20) + km;
+          document.querySelector("#shabesJobsAmount").value * 40 +
+          document.querySelector("#saturdayNightJobsAmount").value * 30 +
+          (jobsAmount.value -
+            document.querySelector("#shabesJobsAmount").value -
+            document.querySelector("#saturdayNightJobsAmount").value) *
+            20 +
+          km;
       }
     }
   }
   outputDiv.style.border = "1px solid blue";
   outputDiv.style.color = "black";
   outputDiv.style.padding = "1rem";
-  outputDiv.textContent = `שכר המשמרת לפי הנתונים הנ"ל הינו: ${total.toFixed(
+  outputDiv.textContent = `שכר המשמרת לפי הנתונים הנ"ל הינו: \r\n ${total.toFixed(
     2
-  )} ש"ח`;
+  )} ש"ח / ${(total / parseInt(hours.value)).toFixed(2)} לשעה`;
 };
-
-
 
 if (ios() == true) {
   const telInputs = document.querySelectorAll("input[type='tel']");
-  telInputs.forEach(input => {
-    input.setAttribute('type', 'number');
-    input.setAttribute('inputmode', 'decimel');
-  })
+  telInputs.forEach((input) => {
+    input.setAttribute("type", "number");
+    input.setAttribute("inputmode", "decimel");
+  });
 }
